@@ -1,0 +1,1862 @@
+<html>
+        <head><title>Downloaded HTML</title></head>
+        <body>
+            <pre style="white-space: pre-wrap; word-wrap: break-word;"><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Bubu's 19th Magical Birthday Adventure ✨</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #ff6584;
+      --primary-glow: rgba(255, 101, 132, 0.45);
+      --secondary: #9f7aea;
+      --secondary-glow: rgba(159, 122, 234, 0.45);
+      --accent: #f6ad55;
+      --pink-soft: #fed7e2;
+      --lavender-soft: #e9d8fd;
+      --dark-cosmic: #120726;
+      --glass-bg: rgba(255, 255, 255, 0.12);
+      --glass-border: rgba(255, 255, 255, 0.28);
+      --glass-card: rgba(255, 255, 255, 0.18);
+      --text-white: #ffffff;
+      --text-gold: #fbd38d;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: radial-gradient(ellipse at bottom, #1b1035 0%, #0d061c 100%);
+      color: var(--text-white);
+      min-height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    /* Ambient Dynamic Aurora Background */
+    .aurora-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      background: 
+        radial-gradient(circle at 15% 20%, rgba(255, 101, 132, 0.25) 0%, transparent 45%),
+        radial-gradient(circle at 85% 30%, rgba(159, 122, 234, 0.25) 0%, transparent 45%),
+        radial-gradient(circle at 50% 80%, rgba(251, 182, 206, 0.18) 0%, transparent 50%),
+        radial-gradient(circle at 75% 85%, rgba(127, 90, 240, 0.2) 0%, transparent 40%);
+      filter: blur(40px);
+      animation: auroraShift 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes auroraShift {
+      0% { transform: scale(1) rotate(0deg); }
+      100% { transform: scale(1.15) rotate(4deg); }
+    }
+
+    #fx-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* HUD Top Bar */
+    .hud {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 50;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(18, 7, 38, 0.6);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .brand-hud {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      background: linear-gradient(135deg, #fff, #fed7e2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .controls-hud {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hud-btn {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .hud-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    /* Progress Track */
+    .progress-wrap {
+      flex: 1;
+      max-width: 220px;
+      margin: 0 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      height: 7px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 10%;
+      background: linear-gradient(90deg, #ff6584, #f6ad55, #9f7aea);
+      box-shadow: 0 0 10px rgba(255, 101, 132, 0.8);
+      transition: width 0.6s ease;
+    }
+
+    /* Main Container & Screens */
+    main {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 75px 16px 30px;
+    }
+
+    .screen {
+      display: none;
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(24px) scale(0.97);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .screen.active {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Glassmorphism Card Wrapper */
+    .glass-card {
+      background: var(--glass-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 28px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+      padding: 35px 28px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* Typography */
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      letter-spacing: -0.5px;
+    }
+
+    .tag-pill {
+      display: inline-block;
+      padding: 6px 16px;
+      background: rgba(255, 101, 132, 0.2);
+      border: 1px solid rgba(255, 101, 132, 0.4);
+      color: #ffd6e0;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      backdrop-filter: blur(8px);
+    }
+
+    .title-magical {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff 20%, #ffd6e0 50%, #fbd38d 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 15px;
+      line-height: 1.15;
+      text-shadow: 0 0 40px rgba(255, 101, 132, 0.4);
+    }
+
+    .subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: rgba(255, 255, 255, 0.88);
+      font-weight: 300;
+      max-width: 620px;
+      margin: 0 auto 28px;
+      line-height: 1.6;
+    }
+
+    /* Primary Glowing Button */
+    .btn-magical {
+      position: relative;
+      background: linear-gradient(135deg, #ff6584, #b83280);
+      color: white;
+      border: none;
+      padding: 16px 36px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 30px var(--primary-glow), inset 0 1px 2px rgba(255, 255, 255, 0.4);
+      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    .btn-magical::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(60deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: rotate(25deg) translateY(-100%);
+      transition: transform 0.75s ease;
+    }
+
+    .btn-magical:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 15px 40px rgba(255, 101, 132, 0.65);
+    }
+
+    .btn-magical:hover::after {
+      transform: rotate(25deg) translateY(100%);
+    }
+
+    .btn-magical:active {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    /* Screen 1: Welcome elements */
+    .welcome-badge-group {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .age-badge {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: #ffd6e0;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 4px 18px;
+      border-radius: 30px;
+      border: 1px dashed rgba(255, 214, 224, 0.4);
+    }
+
+    .floating-avatar-container {
+      width: 130px;
+      height: 130px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      padding: 5px;
+      background: linear-gradient(135deg, #ff6584, #f6ad55, #9f7aea);
+      box-shadow: 0 0 30px rgba(255, 101, 132, 0.6);
+      animation: floatSlow 4s ease-in-out infinite;
+    }
+
+    .floating-avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #241442;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Level 2: The Door */
+    .door-wrapper {
+      perspective: 1200px;
+      width: 200px;
+      height: 310px;
+      margin: 20px auto 30px;
+      cursor: pointer;
+    }
+
+    .door-frame {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      border: 6px solid #fbd38d;
+      border-radius: 120px 120px 10px 10px;
+      box-shadow: 0 0 35px rgba(251, 211, 141, 0.5), inset 0 0 20px rgba(0, 0, 0, 0.6);
+      background: radial-gradient(circle, #ffe699, #ec4899);
+      overflow: hidden;
+    }
+
+    .door-leaves {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+    }
+
+    .door-leaf {
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(145deg, #9f7aea, #553c9a);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .door-leaf.left {
+      transform-origin: left;
+      border-right: 2px solid rgba(251, 211, 141, 0.6);
+    }
+
+    .door-leaf.right {
+      transform-origin: right;
+      border-left: 2px solid rgba(251, 211, 141, 0.6);
+    }
+
+    .door-wrapper.opened .door-leaf.left {
+      transform: rotateY(-115deg);
+    }
+
+    .door-wrapper.opened .door-leaf.right {
+      transform: rotateY(115deg);
+    }
+
+    .door-portal-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      background: radial-gradient(circle, #fff0f6, #ff758c);
+      color: #333;
+      z-index: 0;
+    }
+
+    /* Level 3: Gift Kingdom */
+    .gifts-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 15px;
+      width: 100%;
+      margin: 25px 0;
+    }
+
+    @media (max-width: 768px) {
+      .gifts-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .gift-box-item {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 18px;
+      padding: 16px 10px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .gift-box-item:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-5px) scale(1.04);
+      box-shadow: 0 10px 25px rgba(255, 101, 132, 0.3);
+    }
+
+    .gift-box-item.opened {
+      border-color: #fbd38d;
+      background: rgba(251, 211, 141, 0.15);
+    }
+
+    .gift-icon {
+      font-size: 2.2rem;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .gift-box-item:hover .gift-icon {
+      transform: scale(1.15) rotate(6deg);
+    }
+
+    .gift-title {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #ffd6e0;
+    }
+
+    /* Level 4: Butterfly Arena */
+    .butterfly-arena {
+      position: relative;
+      width: 100%;
+      height: 340px;
+      background: rgba(18, 7, 38, 0.5);
+      border: 1px dashed rgba(255, 255, 255, 0.25);
+      border-radius: 20px;
+      margin: 20px 0;
+      overflow: hidden;
+      touch-action: none;
+    }
+
+    .fly-target {
+      position: absolute;
+      font-size: 2.8rem;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+      animation: floatButterfly 2s ease-in-out infinite alternate;
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+    }
+
+    @keyframes floatButterfly {
+      0% { transform: scale(1) translateY(0); }
+      100% { transform: scale(1.1) translateY(-12px); }
+    }
+
+    /* Level 5: Balloon Field */
+    .balloons-area {
+      position: relative;
+      width: 100%;
+      height: 350px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+      margin: 20px 0;
+      overflow: hidden;
+    }
+
+    .floating-balloon {
+      position: absolute;
+      bottom: -80px;
+      cursor: pointer;
+      font-size: 3.2rem;
+      transition: transform 0.2s;
+      animation: riseBalloon linear forwards;
+    }
+
+    @keyframes riseBalloon {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-460px); }
+    }
+
+    /* Level 6: Constellation Stars */
+    .sky-arena {
+      width: 100%;
+      height: 330px;
+      position: relative;
+      border-radius: 20px;
+      background: radial-gradient(circle at center, #211244 0%, #0d061c 100%);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      margin: 20px 0;
+      overflow: hidden;
+    }
+
+    .constellation-star {
+      position: absolute;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #ffd700;
+      filter: drop-shadow(0 0 15px #fbd38d);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .constellation-star:hover {
+      transform: scale(1.4) rotate(20deg);
+      filter: drop-shadow(0 0 25px #ffffff);
+    }
+
+    .constellation-star.collected {
+      opacity: 0.3;
+      transform: scale(0.8);
+      pointer-events: none;
+    }
+
+    /* Level 7: Treasure Grid */
+    .treasure-chest-icon {
+      font-size: 4.8rem;
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      margin: 15px auto;
+      filter: drop-shadow(0 0 25px rgba(246, 173, 85, 0.7));
+      display: inline-block;
+    }
+
+    .treasure-chest-icon:hover {
+      transform: scale(1.15) rotate(-5deg);
+    }
+
+    .wishes-30-grid {
+      display: none;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 14px;
+      max-height: 380px;
+      overflow-y: auto;
+      padding: 10px;
+      margin-top: 20px;
+      scrollbar-width: thin;
+      scrollbar-color: #ff6584 rgba(255, 255, 255, 0.1);
+    }
+
+    .wishes-30-grid::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .wishes-30-grid::-webkit-scrollbar-thumb {
+      background: #ff6584;
+      border-radius: 10px;
+    }
+
+    .wish-card-mini {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 14px;
+      padding: 14px;
+      font-size: 0.88rem;
+      line-height: 1.45;
+      color: #fff;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      text-align: left;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .wish-card-mini:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    /* Level 8: Birthday Cake & Candles */
+    .cake-container {
+      margin: 25px auto 30px;
+      position: relative;
+      width: 250px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .candles-row {
+      display: flex;
+      gap: 24px;
+      margin-bottom: -10px;
+      z-index: 5;
+    }
+
+    .candle {
+      position: relative;
+      width: 16px;
+      height: 52px;
+      background: repeating-linear-gradient(45deg, #fff, #fff 5px, #ff6584 5px, #ff6584 10px);
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    .flame {
+      position: absolute;
+      top: -24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 24px;
+      background: radial-gradient(circle at 50% 60%, #fff 20%, #ffde59 50%, #ff5722 80%);
+      border-radius: 50% 50% 35% 35%;
+      box-shadow: 0 0 15px #ffde59, 0 0 25px #ff5722;
+      animation: flicker 0.6s infinite alternate ease-in-out;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .candle.lit .flame {
+      opacity: 1;
+    }
+
+    @keyframes flicker {
+      0% { transform: translateX(-50%) scale(1) rotate(-2deg); }
+      100% { transform: translateX(-50%) scale(1.15) rotate(3deg); }
+    }
+
+    .cake-tier {
+      width: 100%;
+      background: linear-gradient(180deg, #fbb6ce 0%, #f687b3 100%);
+      border-radius: 15px 15px 8px 8px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), inset 0 4px 6px rgba(255, 255, 255, 0.5);
+      position: relative;
+      overflow: hidden;
+      border: 3px solid #fff;
+    }
+
+    .cake-tier.top {
+      width: 170px;
+      height: 55px;
+      background: linear-gradient(180deg, #fed7e2 0%, #fbb6ce 100%);
+    }
+
+    .cake-tier.bottom {
+      width: 240px;
+      height: 75px;
+      margin-top: -5px;
+    }
+
+    .icing-drip {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 18px;
+      background: #ffffff;
+      border-radius: 0 0 15px 15px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+
+    .cake-plate {
+      width: 270px;
+      height: 14px;
+      background: #e2e8f0;
+      border-radius: 20px;
+      margin-top: -3px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Level 9: Secret Letter */
+    .envelope-box {
+      width: 140px;
+      height: 100px;
+      background: linear-gradient(135deg, #ffd6e0, #f6ad55);
+      border-radius: 8px;
+      margin: 15px auto 25px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s;
+    }
+
+    .envelope-box:hover {
+      transform: scale(1.08) translateY(-4px);
+    }
+
+    .letter-paper {
+      display: none;
+      background: rgba(255, 255, 255, 0.95);
+      color: #2d3748;
+      border-radius: 18px;
+      padding: 30px 24px;
+      text-align: left;
+      font-family: 'Caveat', cursive;
+      font-size: 1.45rem;
+      line-height: 1.6;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+      max-width: 640px;
+      margin: 0 auto;
+      border: 2px solid #fed7e2;
+      position: relative;
+    }
+
+    .letter-signature {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      color: #97266d;
+      margin-top: 20px;
+      text-align: right;
+    }
+
+    /* Level 10: Grand Finale Celebration */
+    .finale-glow-heading {
+      font-size: clamp(2.6rem, 7vw, 4.5rem);
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 0 20px #ff6584, 0 0 40px #ff6584, 0 0 60px #9f7aea;
+      animation: pulseGlow 2.5s infinite alternate;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    @keyframes pulseGlow {
+      0% { text-shadow: 0 0 20px #ff6584, 0 0 40px #ff6584; }
+      100% { text-shadow: 0 0 30px #ff6584, 0 0 70px #f6ad55, 0 0 90px #9f7aea; }
+    }
+
+    .memories-badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin: 25px 0;
+    }
+
+    .badge-pill {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 30px;
+      padding: 8px 18px;
+      font-size: 0.9rem;
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Modal / Popups */
+    .magical-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(13, 6, 28, 0.75);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+      padding: 16px;
+    }
+
+    .magical-modal.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-box {
+      background: linear-gradient(145deg, rgba(35, 17, 65, 0.95), rgba(18, 7, 38, 0.98));
+      border: 1px solid rgba(255, 214, 224, 0.4);
+      border-radius: 24px;
+      max-width: 480px;
+      width: 100%;
+      padding: 30px 24px;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+      transform: scale(0.9);
+      transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+    }
+
+    .magical-modal.show .modal-box {
+      transform: scale(1);
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Footer Credits */
+    .footer-credits {
+      margin-top: 25px;
+      font-size: 0.82rem;
+      color: rgba(255, 255, 255, 0.6);
+      letter-spacing: 0.5px;
+    }
+
+    .footer-credits strong {
+      color: #ffd6e0;
+    }
+
+    /* Floating ambient emojis */
+    .ambient-item {
+      position: fixed;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.5;
+      animation: floatAround linear infinite;
+    }
+
+    @keyframes floatAround {
+      0% { transform: translateY(105vh) rotate(0deg); opacity: 0; }
+      15% { opacity: 0.7; }
+      85% { opacity: 0.7; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Aurora Dynamic Background Layer -->
+  <div class="aurora-bg"></div>
+
+  <!-- Interactive FX Canvas for Sparks, Confetti, and Fireworks -->
+  <canvas id="fx-canvas"></canvas>
+
+  <!-- Ambient Floating Emojis Layer -->
+  <div id="ambient-layer"></div>
+
+  <!-- Top Adventure HUD Bar -->
+  <header class="hud">
+    <div class="brand-hud">
+      <span>👑</span>
+      <span>Bubu's 19th Quest</span>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-bar" id="game-progress"></div>
+    </div>
+
+    <div class="controls-hud">
+      <button class="hud-btn" id="audio-toggle" title="Toggle Magical Chimes">
+        <span id="audio-icon">🎵</span>
+        <span id="audio-text">Music ON</span>
+      </button>
+      <button class="hud-btn" id="badge-tracker">
+        <span>⭐</span>
+        <span id="badge-count">1 / 10</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Adventure Journey Screens Container -->
+  <main>
+
+    <!-- LEVEL 1: MAGICAL WELCOME -->
+    <section class="screen active" id="screen-1">
+      <div class="glass-card">
+        <span class="tag-pill">✨ The 19th Chapter of Wonder ✨</span>
+        
+        <div class="floating-avatar-container">
+          <div class="floating-avatar">🌸</div>
+        </div>
+
+        <h1 class="title-magical">Happy 19th Birthday, Bubu!</h1>
+        
+        <div class="welcome-badge-group">
+          <span class="age-badge">19 Years of Radiance</span>
+          <span class="age-badge">Specially Crafted by Buggu 💖</span>
+        </div>
+
+        <p class="subtitle">
+          Welcome to your whimsical birthday adventure, lovely Bubu! 
+          Today is dedicated entirely to celebrating your bright smile, your sweet heart, 
+          and every wondrous dream waiting for you. Are you ready to begin?
+        </p>
+
+        <button class="btn-magical" onclick="goToScreen(2)">
+          <span>Start the Surprise</span>
+          <span>🎁</span>
+        </button>
+
+        <div class="footer-credits">
+          Made with infinite warmth by <strong>Buggu</strong> for <strong>Bubu</strong>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEVEL 2: THE MAGICAL DOOR -->
+    <section class="screen" id="screen-2">
+      <div class="glass-card">
+        <span class="tag-pill">Level 2: The Portal of Grace</span>
+        <h2 class="title-magical">The Magical Gateway</h2>
+        <p class="subtitle">
+          Before you lies a sacred portal enchanted exclusively for 19-year-old Bubu. 
+          Tap gently upon the double doors to reveal the magical truth within.
+        </p>
+
+        <div class="door-wrapper" id="magical-door" onclick="unlockDoor()">
+          <div class="door-frame">
+            <div class="door-portal-content">
+              <span>✨</span>
+              <p style="font-size: 0.9rem; font-weight: 700; color: #a21caf; margin-top: 8px;">UNLOCKED</p>
+            </div>
+            <div class="door-leaves">
+              <div class="door-leaf left">
+                <span style="font-size: 1.8rem; filter: drop-shadow(0 0 5px gold);">🌟</span>
+              </div>
+              <div class="door-leaf right">
+                <span style="font-size: 1.8rem; filter: drop-shadow(0 0 5px gold);">💖</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p id="door-hint" style="font-size: 0.95rem; color: #ffd6e0; margin-bottom: 20px;">
+          👉 Tap the door to unlock your birthday path!
+        </p>
+
+        <button class="btn-magical" id="door-next-btn" style="display: none;" onclick="goToScreen(3)">
+          <span>Enter the Kingdom</span>
+          <span>🌸</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- LEVEL 3: GIFT KINGDOM -->
+    <section class="screen" id="screen-3">
+      <div class="glass-card">
+        <span class="tag-pill">Level 3: Kingdom of Treasures</span>
+        <h2 class="title-magical">Gift Kingdom</h2>
+        <p class="subtitle">
+          Ten enchanted gift boxes float in the gentle breeze. 
+          Each box contains a customized blessing tailored just for Bubu at 19! 
+          Open them all to continue your quest!
+        </p>
+
+        <div class="gifts-grid" id="gifts-container">
+          <!-- 10 Unique floating gift boxes -->
+        </div>
+
+        <p id="gifts-status" style="font-size: 0.95rem; color: #fbd38d; margin-bottom: 20px;">
+          Gifts opened: <strong id="gifts-counter">0</strong> / 10
+        </p>
+
+        <button class="btn-magical" id="gifts-next-btn" style="opacity: 0.5; pointer-events: none;" onclick="goToScreen(4)">
+          <span>Onward to Butterfly Realm</span>
+          <span>🦋</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- LEVEL 4: BUTTERFLY CHALLENGE -->
+    <section class="screen" id="screen-4">
+      <div class="glass-card">
+        <span class="tag-pill">Level 4: Meadow of Wonders</span>
+        <h2 class="title-magical">The Butterfly Challenge</h2>
+        <p class="subtitle">
+          Delicate, luminous butterflies are fluttering playfully across your screen! 
+          Catch 5 of these magical creatures to unlock hidden compliments meant for you, Bubu!
+        </p>
+
+        <div class="butterfly-arena" id="butterfly-arena">
+          <!-- Spawned butterflies -->
+        </div>
+
+        <p style="font-size: 1rem; color: #fed7e2; margin-bottom: 15px;">
+          Butterflies caught: <strong id="butterfly-count">0</strong> / 5
+        </p>
+
+        <button class="btn-magical" id="butterfly-next-btn" style="opacity: 0.5; pointer-events: none;" onclick="goToScreen(5)">
+          <span>Fly to Balloon World</span>
+          <span>🎈</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- LEVEL 5: BALLOON WORLD -->
+    <section class="screen" id="screen-5">
+      <div class="glass-card">
+        <span class="tag-pill">Level 5: Sky of Affirmations</span>
+        <h2 class="title-magical">Balloon World</h2>
+        <p class="subtitle">
+          Pop these vibrant birthday balloons floating upwards into the twilight! 
+          Pop at least 6 to gather sweet blessings celebrating your gorgeous soul.
+        </p>
+
+        <div class="balloons-area" id="balloons-area">
+          <!-- Floating balloons -->
+        </div>
+
+        <p style="font-size: 1rem; color: #fed7e2; margin-bottom: 15px;">
+          Balloons popped: <strong id="balloon-count">0</strong> / 6
+        </p>
+
+        <button class="btn-magical" id="balloons-next-btn" style="opacity: 0.5; pointer-events: none;" onclick="goToScreen(6)">
+          <span>Gaze at the Stars</span>
+          <span>⭐</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- LEVEL 6: STAR COLLECTION -->
+    <section class="screen" id="screen-6">
+      <div class="glass-card">
+        <span class="tag-pill">Level 6: Starlight Galaxy</span>
+        <h2 class="title-magical">Star Collection</h2>
+        <p class="subtitle">
+          The night sky shimmers with stars aligned for Bubu's 19th birthday. 
+          Collect all 5 constellation stars to reveal the cosmic horoscope written for you.
+        </p>
+
+        <div class="sky-arena" id="sky-arena">
+          <!-- 5 Constellation stars positioned -->
+        </div>
+
+        <p style="font-size: 1rem; color: #fbd38d; margin-bottom: 15px;">
+          Starlight collected: <strong id="star-count">0</strong> / 5
+        </p>
+
+        <button class="btn-magical" id="star-next-btn" style="opacity: 0.5; pointer-events: none;" onclick="goToScreen(7)">
+          <span>Unlock the Chest</span>
+          <span>💎</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- LEVEL 7: TREASURE CHEST -->
+    <section class="screen" id="screen-7">
+      <div class="glass-card">
+        <span class="tag-pill">Level 7: The Vault of 30 Wishes</span>
+        <h2 class="title-magical">The Magical Treasure Chest</h2>
+        <p class="subtitle">
+          A legendary royal vault crafted especially for Bubu. 
+          Touch the glowing chest to unlock 30 precious wishes and affirmations for your 19th year!
+        </p>
+
+        <div class="treasure-chest-icon" id="treasure-chest" onclick="openTreasureChest()">
+          🎁
+        </div>
+
+        <p id="chest-hint" style="color: #ffd6e0; font-size: 0.95rem; margin-bottom: 10px;">
+          Tap the treasure chest to uncover its secrets!
+        </p>
+
+        <div class="wishes-30-grid" id="wishes-30-grid">
+          <!-- 30 unique wishes dynamically populated -->
+        </div>
+
+        <div style="margin-top: 25px;">
+          <button class="btn-magical" id="chest-next-btn" style="display: none;" onclick="goToScreen(8)">
+            <span>Light the Birthday Cake</span>
+            <span>🎂</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEVEL 8: BIRTHDAY CAKE -->
+    <section class="screen" id="screen-8">
+      <div class="glass-card">
+        <span class="tag-pill">Level 8: The Milestone Ceremony</span>
+        <h2 class="title-magical">Light the 19th Cake!</h2>
+        <p class="subtitle">
+          Tap each of the birthday candles to light the flame! 
+          Once all candles are glowing, make your sweetest wish for age 19!
+        </p>
+
+        <div class="cake-container">
+          <div class="candles-row" id="candles-row">
+            <div class="candle" onclick="lightCandle(this)"><div class="flame"></div></div>
+            <div class="candle" onclick="lightCandle(this)"><div class="flame"></div></div>
+            <div class="candle" onclick="lightCandle(this)"><div class="flame"></div></div>
+            <div class="candle" onclick="lightCandle(this)"><div class="flame"></div></div>
+          </div>
+          <div class="cake-tier top">
+            <div class="icing-drip"></div>
+            <div style="font-weight: 800; font-size: 1.2rem; color: #fff; margin-top: 22px;">19</div>
+          </div>
+          <div class="cake-tier bottom">
+            <div class="icing-drip"></div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #fff; margin-top: 32px; letter-spacing: 2px;">BUBU</div>
+          </div>
+          <div class="cake-plate"></div>
+        </div>
+
+        <p id="cake-status" style="font-size: 0.95rem; color: #fed7e2; margin-bottom: 20px;">
+          Candles burning: <strong id="candles-count">0</strong> / 4
+        </p>
+
+        <button class="btn-magical" id="cake-next-btn" style="display: none;" onclick="goToScreen(9)">
+          <span>Read Your Secret Letter</span>
+          <span>💌</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- LEVEL 9: SECRET LETTER -->
+    <section class="screen" id="screen-9">
+      <div class="glass-card">
+        <span class="tag-pill">Level 9: A Message from the Heart</span>
+        <h2 class="title-magical">The Sealed Letter</h2>
+        <p class="subtitle">
+          A deeply heartfelt letter written exclusively by Buggu for Bubu on her 19th birthday. 
+          Tap the wax-sealed envelope to unfold its words.
+        </p>
+
+        <div class="envelope-box" id="envelope" onclick="openSecretLetter()">
+          💌
+        </div>
+
+        <div class="letter-paper" id="letter-paper">
+          <div id="typewriter-text"></div>
+          <div class="letter-signature" id="letter-signature" style="display: none;">
+            Forever & Always with Love,<br>
+            <strong>Buggu 💖</strong>
+          </div>
+        </div>
+
+        <div style="margin-top: 25px;">
+          <button class="btn-magical" id="letter-next-btn" style="display: none;" onclick="goToScreen(10)">
+            <span>Join the Grand Celebration</span>
+            <span>🎉</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEVEL 10: GRAND FINALE CELEBRATION -->
+    <section class="screen" id="screen-10">
+      <div class="glass-card">
+        <span class="tag-pill">Grand Finale: The Royal Celebration</span>
+        
+        <h1 class="finale-glow-heading">🎉 HAPPY BIRTHDAY BUBU! 🎂✨</h1>
+
+        <p class="subtitle" style="font-size: 1.25rem; font-weight: 400; color: #fff;">
+          Welcome to age <strong>19</strong>, our precious Bubu! May your year ahead overflow with sparkling 
+          laughter, endless confidence, boundless adventures, glowing health, academic and creative triumph, 
+          and all the gentle serenity your kind soul deserves!
+        </p>
+
+        <div class="memories-badge-row">
+          <div class="badge-pill">🌸 19 Years of Pure Sunshine</div>
+          <div class="badge-pill">👑 Queen of Kindness</div>
+          <div class="badge-pill">✨ Future Limitless</div>
+          <div class="badge-pill">💖 Loved Endlessly by Buggu</div>
+        </div>
+
+        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
+          <button class="btn-magical" onclick="triggerMegaConfetti()">
+            <span>Launch More Fireworks!</span>
+            <span>🎆</span>
+          </button>
+          <button class="hud-btn" style="padding: 14px 28px; font-size: 1rem;" onclick="goToScreen(1)">
+            <span>Replay the Adventure</span>
+            <span>🔄</span>
+          </button>
+        </div>
+
+        <div class="footer-credits" style="margin-top: 35px;">
+          Promoted by <strong>Aman raj</strong> • Created with all the love in the universe by <strong>Buggu</strong> for <strong>Bubu</strong>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Interactive Modal Popup for Messages -->
+  <div class="magical-modal" id="magical-modal">
+    <div class="modal-box">
+      <button class="modal-close-btn" onclick="closeModal()">×</button>
+      <div id="modal-icon" style="font-size: 3.5rem; margin-bottom: 12px;">✨</div>
+      <h3 id="modal-title" style="font-size: 1.6rem; color: #fbd38d; margin-bottom: 10px;">Wish Unlocked!</h3>
+      <p id="modal-message" style="font-size: 1.05rem; color: #fff; line-height: 1.5; margin-bottom: 22px;">
+        A special surprise awaits you!
+      </p>
+      <button class="btn-magical" style="padding: 10px 24px; font-size: 0.95rem;" onclick="closeModal()">
+        <span>Continue Journey</span>
+        <span>💖</span>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    /* ==========================================================================
+       SYNTHESIZED WEB AUDIO ENGINE (Self-contained, zero external audio lag)
+       ========================================================================== */
+    class SoundEngine {
+      constructor() {
+        this.ctx = null;
+        this.bgmPlaying = false;
+        this.sfxEnabled = true;
+        this.timer = null;
+      }
+
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          this.ctx = new AudioContext();
+        }
+        if (this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+
+      playTone(freq, type = 'sine', duration = 0.3, gainVal = 0.15) {
+        if (!this.sfxEnabled) return;
+        this.init();
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = type;
+          osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+
+          gain.gain.setValueAtTime(gainVal, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + duration);
+
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+
+          osc.start();
+          osc.stop(this.ctx.currentTime + duration);
+        } catch (e) {
+          console.warn("Audio note err", e);
+        }
+      }
+
+      playChime() {
+        const notes = [523.25, 659.25, 783.99, 1046.50]; // C E G C
+        notes.forEach((freq, idx) => {
+          setTimeout(() => this.playTone(freq, 'sine', 0.4, 0.12), idx * 80);
+        });
+      }
+
+      playPop() {
+        this.playTone(350, 'triangle', 0.12, 0.2);
+      }
+
+      playSparkle() {
+        const notes = [880, 1174, 1318, 1760];
+        notes.forEach((f, i) => {
+          setTimeout(() => this.playTone(f, 'sine', 0.25, 0.08), i * 60);
+        });
+      }
+
+      playFanfare() {
+        const notes = [440, 554.37, 659.25, 880, 1108.73];
+        notes.forEach((f, i) => {
+          setTimeout(() => this.playTone(f, 'triangle', 0.5, 0.15), i * 110);
+        });
+      }
+
+      toggleBGM() {
+        this.init();
+        const icon = document.getElementById('audio-icon');
+        const text = document.getElementById('audio-text');
+
+        if (this.bgmPlaying) {
+          clearInterval(this.timer);
+          this.bgmPlaying = false;
+          icon.textContent = '🔇';
+          text.textContent = 'Music OFF';
+        } else {
+          this.bgmPlaying = true;
+          icon.textContent = '🎵';
+          text.textContent = 'Music ON';
+          this.startProceduralMelody();
+        }
+      }
+
+      startProceduralMelody() {
+        const scale = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25]; // Pentatonic warmth
+        let step = 0;
+        this.timer = setInterval(() => {
+          if (!this.bgmPlaying) return;
+          const note = scale[step % scale.length];
+          this.playTone(note, 'sine', 0.6, 0.035);
+          step = (step + Math.floor(Math.random() * 3) + 1) % scale.length;
+        }, 450);
+      }
+    }
+
+    const sound = new SoundEngine();
+    document.getElementById('audio-toggle').addEventListener('click', () => sound.toggleBGM());
+
+    /* ==========================================================================
+       CANVAS FX ENGINE (Fireworks, Confetti & Glowing Particles)
+       ========================================================================== */
+    const canvas = document.getElementById('fx-canvas');
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    const particles = [];
+
+    class Particle {
+      constructor(x, y, color, speedX, speedY, size, type = 'confetti') {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.speedX = speedX;
+        this.speedY = speedY;
+        this.size = size;
+        this.alpha = 1;
+        this.decay = Math.random() * 0.015 + 0.008;
+        this.type = type;
+        this.rotation = Math.random() * 360;
+        this.rotSpeed = (Math.random() - 0.5) * 8;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.rotation += this.rotSpeed;
+        if (this.type === 'confetti') {
+          this.speedY += 0.08; // gravity
+        } else {
+          this.speedY += 0.02;
+        }
+        this.alpha -= this.decay;
+      }
+
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, this.alpha);
+        ctx.translate(this.x, this.y);
+        ctx.rotate((this.rotation * Math.PI) / 180);
+        ctx.fillStyle = this.color;
+
+        if (this.type === 'confetti') {
+          ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size * 1.6);
+        } else {
+          ctx.beginPath();
+          ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+    }
+
+    function createExplosion(x, y, count = 40) {
+      const colors = ['#ff6584', '#ffd6e0', '#fbd38d', '#9f7aea', '#63b3ed', '#4fd1c5'];
+      for (let i = 0; i < count; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = Math.random() * 6 + 2;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const p = new Particle(
+          x,
+          y,
+          color,
+          Math.cos(angle) * velocity,
+          Math.sin(angle) * velocity,
+          Math.random() * 6 + 3,
+          Math.random() > 0.5 ? 'confetti' : 'spark'
+        );
+        particles.push(p);
+      }
+    }
+
+    function triggerMegaConfetti() {
+      sound.playFanfare();
+      for (let i = 0; i < 5; i++) {
+        setTimeout(() => {
+          createExplosion(Math.random() * width, Math.random() * (height * 0.6), 50);
+        }, i * 250);
+      }
+    }
+
+    function loopFx() {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.update();
+        p.draw();
+        if (p.alpha <= 0) {
+          particles.splice(i, 1);
+        }
+      }
+      requestAnimationFrame(loopFx);
+    }
+    loopFx();
+
+    /* Ambient Floating Icons */
+    const ambientLayer = document.getElementById('ambient-layer');
+    const emojis = ['💖', '✨', '🌸', '🦋', '⭐', '🎈', '💐'];
+    for (let i = 0; i < 16; i++) {
+      const span = document.createElement('span');
+      span.className = 'ambient-item';
+      span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      span.style.left = `${Math.random() * 95}vw`;
+      span.style.fontSize = `${Math.random() * 1.2 + 1}rem`;
+      span.style.animationDuration = `${Math.random() * 12 + 10}s`;
+      span.style.animationDelay = `${Math.random() * 8}s`;
+      ambientLayer.appendChild(span);
+    }
+
+    /* ==========================================================================
+       LEVEL PROGRESSION & STATE
+       ========================================================================== */
+    let currentScreen = 1;
+    const totalScreens = 10;
+
+    function updateProgress(lvl) {
+      const bar = document.getElementById('game-progress');
+      const badge = document.getElementById('badge-count');
+      const pct = (lvl / totalScreens) * 100;
+      bar.style.width = `${pct}%`;
+      badge.textContent = `${lvl} / ${totalScreens}`;
+    }
+
+    function goToScreen(targetLevel) {
+      sound.playChime();
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      const activeEl = document.getElementById(`screen-${targetLevel}`);
+      if (activeEl) {
+        activeEl.classList.add('active');
+        currentScreen = targetLevel;
+        updateProgress(targetLevel);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // Level-specific initialization triggers
+        if (targetLevel === 4) initButterflies();
+        if (targetLevel === 5) initBalloons();
+        if (targetLevel === 6) initStars();
+        if (targetLevel === 10) triggerMegaConfetti();
+      }
+    }
+
+    /* Modal System */
+    function showModal(title, msg, icon = '🌸') {
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-message').textContent = msg;
+      document.getElementById('modal-icon').textContent = icon;
+      document.getElementById('magical-modal').classList.add('show');
+      sound.playSparkle();
+    }
+
+    function closeModal() {
+      document.getElementById('magical-modal').classList.remove('show');
+    }
+
+    /* ==========================================================================
+       LEVEL 2: THE MAGICAL DOOR
+       ========================================================================== */
+    let doorOpened = false;
+    function unlockDoor() {
+      if (doorOpened) return;
+      doorOpened = true;
+      const door = document.getElementById('magical-door');
+      door.classList.add('opened');
+      sound.playFanfare();
+      createExplosion(window.innerWidth / 2, window.innerHeight / 2, 45);
+
+      document.getElementById('door-hint').textContent = "✨ The magical threshold is unlocked for you, Bubu!";
+      document.getElementById('door-next-btn').style.display = 'inline-flex';
+
+      setTimeout(() => {
+        showModal(
+          "Welcome to Your Realm, Bubu!",
+          "Nineteen years ago, the universe became infinitely brighter because you arrived. Step through with your head held high!",
+          "🚪"
+        );
+      }, 700);
+    }
+
+    /* ==========================================================================
+       LEVEL 3: GIFT KINGDOM (10 UNIQUE GIFTS)
+       ========================================================================== */
+    const giftWishes = [
+      { t: "Infinite Joy", m: "May your 19th year bring laughter so sweet it makes your eyes crinkle with pure happiness!", i: "🎁" },
+      { t: "Unshakable Courage", m: "May you always trust your gorgeous intuition and stand tall in your unique brilliance, Bubu!", i: "💎" },
+      { t: "Sweet Dreams", m: "May every artistic ambition and aspiration you carry take flight like wild roses in spring!", i: "🌸" },
+      { t: "Cherished Peace", m: "A calm, gentle mind that always reminds you how thoroughly precious and loved you are.", i: "🕊️" },
+      { t: "Boundless Adventure", m: "Thrilling new journeys, delightful friendships, and memories that shine forever in your heart.", i: "🗺️" },
+      { t: "Golden Health", m: "Vibrant energy, deep restful sleep, and radiant wellness throughout your 19th chapter!", i: "✨" },
+      { t: "Pure Love", m: "The unwavering reminder that Buggu and all your favorite souls adore you to the moon and back.", i: "💖" },
+      { t: "Creative Magic", m: "May inspiration strike whenever you pick up a brush, pen, or song. You are born to create!", i: "🎨" },
+      { t: "Starlight Wisdom", m: "Grace to bloom during changes and the wisdom to always celebrate how uniquely wonderful you are.", i: "⭐" },
+      { t: "Sunshine Prosperity", m: "Abundant success in everything you set your gentle, determined heart toward!", i: "🌻" }
+    ];
+
+    let openedGiftsCount = 0;
+    const giftsContainer = document.getElementById('gifts-container');
+
+    giftWishes.forEach((gift, idx) => {
+      const box = document.createElement('div');
+      box.className = 'gift-box-item';
+      box.innerHTML = `
+        <div class="gift-icon">${gift.i}</div>
+        <div class="gift-title">Gift #${idx + 1}</div>
+      `;
+      box.onclick = () => {
+        if (!box.classList.contains('opened')) {
+          box.classList.add('opened');
+          openedGiftsCount++;
+          document.getElementById('gifts-counter').textContent = openedGiftsCount;
+          createExplosion(window.innerWidth / 2, window.innerHeight / 2, 25);
+          showModal(`Gift #${idx + 1}: ${gift.t}`, gift.m, gift.i);
+
+          if (openedGiftsCount === 10) {
+            const nextBtn = document.getElementById('gifts-next-btn');
+            nextBtn.style.opacity = '1';
+            nextBtn.style.pointerEvents = 'auto';
+            document.getElementById('gifts-status').innerHTML = "🎉 <strong>All 10 gifts collected for Bubu!</strong>";
+          }
+        } else {
+          showModal(`Gift #${idx + 1}: ${gift.t}`, gift.m, gift.i);
+        }
+      };
+      giftsContainer.appendChild(box);
+    });
+
+    /* ==========================================================================
+       LEVEL 4: BUTTERFLY CHALLENGE
+       ========================================================================== */
+    const butterflyCompliments = [
+      "Bubu, your smile lights up even the rainiest afternoon! 🦋",
+      "You have an elegance and kindness that everyone admires! ✨",
+      "Your laugh is Buggu's absolute favorite symphony in the universe! 💖",
+      "Nineteen looks truly breathtaking on you! Keep shining brightly! 🌸",
+      "You are braver, smarter, and sweeter than you ever give yourself credit for! ⭐"
+    ];
+
+    let butterfliesCaught = 0;
+
+    function initButterflies() {
+      const arena = document.getElementById('butterfly-arena');
+      arena.innerHTML = '';
+      butterfliesCaught = 0;
+      document.getElementById('butterfly-count').textContent = "0";
+
+      const bEmojis = ['🦋', '✨', '🦋', '🌸', '🦋'];
+      for (let i = 0; i < 5; i++) {
+        const fly = document.createElement('div');
+        fly.className = 'fly-target';
+        fly.textContent = bEmojis[i];
+        fly.style.left = `${Math.random() * 70 + 15}%`;
+        fly.style.top = `${Math.random() * 60 + 20}%`;
+
+        fly.onclick = (e) => {
+          e.stopPropagation();
+          sound.playSparkle();
+          createExplosion(e.clientX, e.clientY, 20);
+          fly.style.display = 'none';
+          const compliment = butterflyCompliments[butterfliesCaught] || "You're truly wonderful, Bubu!";
+          butterfliesCaught++;
+          document.getElementById('butterfly-count').textContent = butterfliesCaught;
+          showModal(`Butterfly Captured #${butterfliesCaught}`, compliment, '🦋');
+
+          if (butterfliesCaught >= 5) {
+            const btn = document.getElementById('butterfly-next-btn');
+            btn.style.opacity = '1';
+            btn.style.pointerEvents = 'auto';
+          }
+        };
+        arena.appendChild(fly);
+      }
+    }
+
+    /* ==========================================================================
+       LEVEL 5: BALLOON WORLD
+       ========================================================================== */
+    const balloonQuotes = [
+      "You're amazing 🌸",
+      "Keep smiling ✨",
+      "Stay happy 💖",
+      "Keep shining 🌟",
+      "Never stop dreaming 🌈",
+      "Believe in yourself ⭐",
+      "Your future is bright ✨",
+      "Keep growing 💙",
+      "You're one of a kind 🌼",
+      "Enjoy every moment 🎉"
+    ];
+
+    let poppedBalloons = 0;
+    let balloonInterval = null;
+
+    function initBalloons() {
+      const area = document.getElementById('balloons-area');
+      area.innerHTML = '';
+      poppedBalloons = 0;
+      document.getElementById('balloon-count').textContent = "0";
+
+      if (balloonInterval) clearInterval(balloonInterval);
+
+      balloonInterval = setInterval(() => {
+        if (currentScreen !== 5) {
+          clearInterval(balloonInterval);
+          return;
+        }
+        spawnBalloon(area);
+      }, 850);
+    }
+
+    function spawnBalloon(parent) {
+      const balloon = document.createElement('div');
+      balloon.className = 'floating-balloon';
+      const bIcons = ['🎈', '🎀', '🎈', '💖', '🎈'];
+      balloon.textContent = bIcons[Math.floor(Math.random() * bIcons.length)];
+      balloon.style.left = `${Math.random() * 80 + 10}%`;
+      balloon.style.animationDuration = `${Math.random() * 3 + 3.5}s`;
+
+      balloon.onclick = (e) => {
+        e.stopPropagation();
+        sound.playPop();
+        createExplosion(e.clientX, e.clientY, 22);
+        balloon.remove();
+        poppedBalloons++;
+        document.getElementById('balloon-count').textContent = poppedBalloons;
+
+        const randomQuote = balloonQuotes[Math.floor(Math.random() * balloonQuotes.length)];
+        showModal("Balloon Popped!", `${randomQuote}\n— You are deeply cherished, Bubu!`, '🎈');
+
+        if (poppedBalloons >= 6) {
+          const btn = document.getElementById('balloons-next-btn');
+          btn.style.opacity = '1';
+          btn.style.pointerEvents = 'auto';
+        }
+      };
+
+      parent.appendChild(balloon);
+      setTimeout(() => { if (balloon.parentNode) balloon.remove(); }, 6500);
+    }
+
+    /* ==========================================================================
+       LEVEL 6: STAR COLLECTION (5 CONSTELLATIONS)
+       ========================================================================== */
+    const starMessages = [
+      "Star of Serenity: May peace follow your footsteps wherever your adventures lead, Bubu.",
+      "Star of Radiance: Your 19th year will be filled with sparkling clarity and golden accomplishments.",
+      "Star of Passion: May you paint your world in your favorite hues with boundless creativity.",
+      "Star of Harmony: Surrounded always by true friends, warm hugs, and loyal laughter.",
+      "Star of Destiny: Built on the fondest love of Buggu, your future shines endlessly bright!"
+    ];
+
+    let collectedStars = 0;
+
+    function initStars() {
+      const sky = document.getElementById('sky-arena');
+      sky.innerHTML = '';
+      collectedStars = 0;
+      document.getElementById('star-count').textContent = "0";
+
+      const positions = [
+        { x: 18, y: 25 },
+        { x: 42, y: 65 },
+        { x: 50, y: 20 },
+        { x: 78, y: 35 },
+        { x: 82, y: 75 }
+      ];
+
+      positions.forEach((pos, idx) => {
+        const star = document.createElement('div');
+        star.className = 'constellation-star';
+        star.textContent = '★';
+        star.style.left = `${pos.x}%`;
+        star.style.top = `${pos.y}%`;
+
+        star.onclick = (e) => {
+          sound.playSparkle();
+          createExplosion(e.clientX, e.clientY, 30);
+          star.classList.add('collected');
+          collectedStars++;
+          document.getElementById('star-count').textContent = collectedStars;
+          showModal(`Constellation Star #${collectedStars}`, starMessages[idx], '⭐');
+
+          if (collectedStars >= 5) {
+            const btn = document.getElementById('star-next-btn');
+            btn.style.opacity = '1';
+            btn.style.pointerEvents = 'auto';
+          }
+        };
+
+        sky.appendChild(star);
+      });
+    }
+
+    /* ==========================================================================
+       LEVEL 7: TREASURE CHEST (30 UNIQUE WISH CARDS)
+       ========================================================================== */
+    const thirtyWishes = [
+      "1. Boundless self-confidence in your wonderful gifts.",
+      "2. Sweet mornings filled with peaceful sunshine.",
+      "3. Laughter so contagious it echoes in every room.",
+      "4. Unwavering loyalty and genuine companionship.",
+      "5. Cozy book afternoons and soul-soothing melodies.",
+      "6. Glorious success in every goal you pursue at 19.",
+      "7. The softest hugs on days when you feel worn out.",
+      "8. Wild creative breakthroughs in art and style.",
+      "9. Delicious desserts with zero regrets ever!",
+      "10. Deep conversations that enrich your sparkling heart.",
+      "11. Courage to say yes to thrilling spontaneous travels.",
+      "12. Complete freedom to be your authentic, adorable self.",
+      "13. Radiant health and thriving vitality each morning.",
+      "14. Cozy rainy evenings wrapped in your warmest blanket.",
+      "15. Sweet surprises waiting around every corner.",
+      "16. Endless reasons to fall in love with your journey.",
+      "17. Knowing you areBuggu's greatest joy every day.",
+      "18. Exciting new friendships that celebrate you.",
+      "19. A landmark 19th year full of majestic memories.",
+      "20. Sweet inner peace that keeps your spirit tranquil.",
+      "21. Serendipitous encounters and happy coincidences.",
+      "22. Beautiful outfits that make you feel like royalty.",
+      "23. Songs that instantly elevate your lovely mood.",
+      "24. Starlight dreams that manifest effortlessly.",
+      "25. Recognition for all your subtle hard work.",
+      "26. Warm cups of coffee, cocoa, and sweet smiles.",
+      "27. Protection from all negativity and dark vibes.",
+      "28. An unbreakable belief in your own magic.",
+      "29. Gentle forgiveness for yourself whenever you rest.",
+      "30. A year overflowing with infinite love from Buggu!"
+    ];
+
+    let chestOpened = false;
+    function openTreasureChest() {
+      if (chestOpened) return;
+      chestOpened = true;
+      sound.playFanfare();
+      createExplosion(window.innerWidth / 2, window.innerHeight / 2, 50);
+
+      document.getElementById('treasure-chest').textContent = '👑';
+      document.getElementById('chest-hint').textContent = '✨ 30 Royal Wishes Unlocked for Bubu!';
+      const grid = document.getElementById('wishes-30-grid');
+      grid.style.display = 'grid';
+
+      thirtyWishes.forEach((w) => {
+        const item = document.createElement('div');
+        item.className = 'wish-card-mini';
+        item.innerHTML = `<span>✨</span><span>${w}</span>`;
+        grid.appendChild(item);
+      });
+
+      document.getElementById('chest-next-btn').style.display = 'inline-flex';
+    }
+
+    /* ==========================================================================
+       LEVEL 8: BIRTHDAY CAKE & CANDLE LIGHTING
+       ========================================================================== */
+    let litCandlesCount = 0;
+
+    function lightCandle(candleEl) {
+      if (candleEl.classList.contains('lit')) return;
+      candleEl.classList.add('lit');
+      sound.playSparkle();
+      litCandlesCount++;
+      document.getElementById('candles-count').textContent = litCandlesCount;
+
+      createExplosion(window.innerWidth / 2, window.innerHeight * 0.45, 15);
+
+      if (litCandlesCount === 4) {
+        sound.playFanfare();
+        triggerMegaConfetti();
+        document.getElementById('cake-status').innerHTML = "✨ <strong>All candles lit! Make your grand 19th wish, Bubu!</strong> 🎂";
+        document.getElementById('cake-next-btn').style.display = 'inline-flex';
+      }
+    }
+
+    /* ==========================================================================
+       LEVEL 9: SECRET LETTER WITH TYPEWRITER ANIMATION
+       ========================================================================== */
+    const heartfeltLetter = `Dearest Bubu,
+
+Happy 19th Birthday, my favorite person in the whole universe!
+
+Watching you turn nineteen fills my heart with an overwhelming sense of pride and pure happiness. You carry a softness, a quiet strength, and a sparkle that illuminates every life you touch—especially mine.
+
+Never doubt how truly rare and gifted you are. As you step boldly into this 19th year of your life, remember to take deep breaths, embrace every adventure, giggle freely, and honor the gentle, brilliant girl you are becoming. 
+
+No matter where time takes us, I am always cheering for you, protecting you, and believing in every single one of your dreams. You are precious beyond measure, Bubu.
+
+Happy Birthday, my queen!`;
+
+    let letterOpened = false;
+
+    function openSecretLetter() {
+      if (letterOpened) return;
+      letterOpened = true;
+      sound.playChime();
+      document.getElementById('envelope').style.display = 'none';
+      const paper = document.getElementById('letter-paper');
+      paper.style.display = 'block';
+
+      const targetEl = document.getElementById('typewriter-text');
+      let charIdx = 0;
+
+      function typeWriter() {
+        if (charIdx < heartfeltLetter.length) {
+          const char = heartfeltLetter.charAt(charIdx);
+          targetEl.innerHTML += char === '\n' ? '<br>' : char;
+          charIdx++;
+          setTimeout(typeWriter, 22);
+        } else {
+          document.getElementById('letter-signature').style.display = 'block';
+          document.getElementById('letter-next-btn').style.display = 'inline-flex';
+          createExplosion(window.innerWidth / 2, window.innerHeight / 2, 35);
+        }
+      }
+      typeWriter();
+    }
+  </script>
+</body>
+</html>
+</pre>
+        </body>
+    </html>
